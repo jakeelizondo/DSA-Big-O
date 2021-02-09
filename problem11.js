@@ -1,11 +1,26 @@
 function howManyMovesToSolve(num) {
-  if (num === 1) {
-    return 0;
+  if (num === 3) {
+    return 7;
   }
 
-  return num + howManyMovesToSolve(num - 1);
+  return howManyMovesToSolve(num - 1) * 2 + 1;
 }
 
 console.log(howManyMovesToSolve(5));
 
-// The above function will tell you how many moves it will take to solve the Tower of Hanoi problem where the input, num, is the number of plates you start with
+function printMove(start, end) {
+  console.log(`Move disk from tower ${start} to tower ${end}`);
+}
+
+function playHanoi(n, start, end) {
+  if (n === 1) {
+    printMove(start, end);
+  } else {
+    let other = 6 - (start + end);
+    playHanoi(n - 1, start, other);
+    printMove(start, end);
+    playHanoi(n - 1, other, end);
+  }
+}
+
+playHanoi(3, 1, 3);
